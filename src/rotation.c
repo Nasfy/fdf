@@ -6,12 +6,12 @@
 /*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 20:07:37 by abiriuk           #+#    #+#             */
-/*   Updated: 2018/08/09 18:28:52 by abiriuk          ###   ########.fr       */
+/*   Updated: 2018/08/31 17:43:10 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+#include "stdlib.h"
 
 void	z_rotation_right(t_pixel *pixel, void *ptr)
 {

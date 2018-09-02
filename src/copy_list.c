@@ -6,15 +6,14 @@
 /*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 18:04:30 by abiriuk           #+#    #+#             */
-/*   Updated: 2018/08/09 18:57:53 by abiriuk          ###   ########.fr       */
+/*   Updated: 2018/08/31 17:33:04 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "fdf.h"
 #include "stdlib.h"
 
-t_pixel	*copy_list(t_pixel *pixel_old)
+t_pixel		*copy_list(t_pixel *pixel_old)
 {
 	t_pixel		*pixel_new;
 	t_pixel		*tail;
@@ -71,10 +70,10 @@ t_global	*copy_glist(t_global *head)
 	return (node_new);
 }
 
-void	cp_list(t_global *node_old, t_global *node_new)
+void		cp_list(t_global *node_old, t_global *node_new)
 {
-	t_pixel     *pixel_new;
-	t_pixel     *pixel_old;
+	t_pixel		*pixel_new;
+	t_pixel		*pixel_old;
 
 	pixel_old = node_old->head;
 	pixel_new = node_new->head;
@@ -88,10 +87,10 @@ void	cp_list(t_global *node_old, t_global *node_new)
 	}
 }
 
-void    cp_glist(t_all *all)
+void		cp_glist(t_all *all)
 {
-	t_global    *node_new;
-	t_global    *node_old;
+	t_global	*node_new;
+	t_global	*node_old;
 
 	all->move.y = 0;
 	all->move.x = 0;

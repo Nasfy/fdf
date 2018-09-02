@@ -6,7 +6,7 @@
 /*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 17:16:28 by abiriuk           #+#    #+#             */
-/*   Updated: 2018/08/09 19:03:24 by abiriuk          ###   ########.fr       */
+/*   Updated: 2018/08/31 19:18:47 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 #include "fdf.h"
 #include "mlx.h"
 
@@ -30,9 +29,8 @@ void		error_msg(char *str)
 
 void		check_symb(char elem)
 {
-	if (elem < 32 || (elem > 32 && elem < 44) || (elem > 44 && elem < 48) ||
-			(elem > 57 && elem < 65) || (elem > 90 && elem < 97)
-			|| elem > 122)
+	if (!ft_isalpha(elem) && !ft_isdigit(elem) && !ft_isspace(elem)
+			&& elem != '-' && elem != ',')
 		error_msg("Wrong map");
 }
 
@@ -108,6 +106,5 @@ int			main(int ac, char **av)
 		error_msg("Permission denied");
 	}
 	all.head = make_list(fd);
-//	print_list(&all);
 	cage(&all);
 }

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "fdf.h"
 
 void	coordinates(t_all *all, t_pixel *min, t_pixel *max)

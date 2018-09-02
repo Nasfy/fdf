@@ -3,75 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bcherkas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 15:31:37 by abiriuk           #+#    #+#             */
-/*   Updated: 2017/11/27 18:57:46 by abiriuk          ###   ########.fr       */
+/*   Created: 2017/11/09 16:50:31 by bcherkas          #+#    #+#             */
+/*   Updated: 2018/08/31 19:32:20 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static size_t	ft_count(char const *s, char c)
+void			ft_delmass(char **arr)
 {
-	size_t	n;
-	size_t	nrows;
-
-	n = 0;
-	nrows = 0;
-	while (s[n] != '\0')
-	{
-		if (s[n] != c && (s[n + 1] == c || s[n + 1] == '\0'))
-			nrows++;
-		n++;
-	}
-	return (nrows);
-}
-
-static void		ft_mass(char **arr, char const *s, char c)
-{
-	size_t			i;
-	size_t			ncolumns;
-	unsigned int	start;
-	char			*ci;
+	int i;
 
 	i = 0;
-	ci = *arr;
-	while (s[i] != '\0')
+	while (arr[i])
 	{
-		ncolumns = 0;
-		while (s[i] == c)
-			i++;
-		start = i;
-		while (s[i + ncolumns] != c && s[i + ncolumns] != '\0')
-			ncolumns++;
-		i += ncolumns;
-		*arr = ft_strsub(s, start, ncolumns);
-		if (*arr == NULL)
-		{
-			while (*(arr--) != ci)
-				free(*arr);
-			free(arr);
-		}
-		arr++;
+		free(arr[i]);
+		i++;
 	}
+	free(arr);
+}
+
+static char		*ft_getword(char *s, char c)
+{
+	size_t	len;
+	char	*word;
+
+	len = 0;
+	while (s[len] != c && s[len])
+		len++;
+	word = ft_strsub(s, 0, len);
+	return (word);
+}
+
+static size_t	ft_countwords(const char *s, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (*s)
+	{
+		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
+			i++;
+		s++;
+	}
+	return (i);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	int		i;
 	char	**arr;
-	size_t	count;
+	size_t	n;
 
-	if (s == 0)
+	n = 0;
+	if (s == NULL)
 		return (0);
-	count = ft_count(s, c);
-	i = 0;
-	arr = (char **)ft_memalloc(sizeof(char *) * (count + 1));
+	arr = (char **)malloc(sizeof(char *) * (ft_countwords(s, c)) + 1);
 	if (arr == NULL)
 		return (0);
-	ft_mass(arr, s, c);
-	arr[count] = 0;
+	while (*s)
+	{
+		while (*s == c && *s)
+			s++;
+		if (*s)
+			if ((arr[n++] = ft_getword((char *)s, c)) == NULL)
+			{
+				ft_delmass(arr);
+				return (NULL);
+			}
+		while (*s != c && *s)
+			s++;
+	}
+	arr[n] = NULL;
 	return (arr);
 }

@@ -6,12 +6,12 @@
 /*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 16:42:35 by abiriuk           #+#    #+#             */
-/*   Updated: 2018/08/09 18:25:10 by abiriuk          ###   ########.fr       */
+/*   Updated: 2018/08/31 17:42:22 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+#include "stdlib.h"
 
 void	shift_move(t_pixel *pixel, void *ptr)
 {
@@ -30,7 +30,7 @@ int		move(int keycode, void *param)
 	move_xy_move(all, keycode);
 	if (keycode == 8)
 		cp_glist(all);
-	if (keycode == 69)
+	else if (keycode == 69)
 	{
 		for_each(all, increase, NULL);
 		centering(all);
@@ -48,6 +48,5 @@ int		move(int keycode, void *param)
 		move_z_rot(all, keycode);
 	}
 	redraw(all);
-	print_list(all);
 	return (0);
 }

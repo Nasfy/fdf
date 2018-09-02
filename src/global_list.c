@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 t_global	*new_global_node(t_pixel *head)

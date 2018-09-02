@@ -6,14 +6,15 @@
 /*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 17:06:16 by abiriuk           #+#    #+#             */
-/*   Updated: 2018/08/09 18:12:26 by abiriuk          ###   ########.fr       */
+/*   Updated: 2018/08/31 17:59:06 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include <math.h>
+# include <math.h>
+# include "stdlib.h"
 
 # define HOR 1200
 # define VER 1200
@@ -26,9 +27,9 @@
 
 typedef	struct		s_pixel
 {
-	double				x;
-	double				y;
-	double				z;
+	double			x;
+	double			y;
+	double			z;
 	struct s_pixel	*next;
 	struct s_pixel	*down;
 }					t_pixel;
@@ -53,16 +54,33 @@ typedef struct		s_all
 	t_global		*copy;
 }					t_all;
 
+typedef	struct		s_ln
+{
+	double			x1;
+	double			y1;
+	int				x2;
+	int				y2;
+}					t_ln;
+
+typedef struct		s_leng
+{
+	int				dx;
+	int				dy;
+	int				lengthx;
+	int				lengthy;
+}					t_leng;
+
 t_pixel				*check(char **mass, int y);
 t_global			*new_global_node(t_pixel *head);
 void				error_msg(char *str);
 void				ft_link(t_global *current, t_global *down);
 void				print_list(t_all *all);
 int					exit_x(void *par);
-void				line(t_all *all, int x1, int y1, int x2, int y2);
+void				line(t_all *all, t_ln *ln);
 int					exit_esc(int keycode, void *param);
 void				cage(t_all *all);
-void				for_each(t_all *all, void (*f)(t_pixel *, void *), void *shift_c);
+void				for_each(t_all *all, void (*f)(t_pixel *, void *),
+						void *shift_c);
 void				coordinates(t_all *all, t_pixel *min, t_pixel *max);
 void				centering(t_all *all);
 void				shift(t_pixel *pixel, void *shift_c);

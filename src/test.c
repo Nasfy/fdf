@@ -6,37 +6,19 @@
 /*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 19:11:46 by abiriuk           #+#    #+#             */
-/*   Updated: 2018/08/09 17:57:10 by abiriuk          ###   ########.fr       */
+/*   Updated: 2018/08/31 17:42:00 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
-#include <stdio.h>
-
-void	print_list(t_all *all)
-{
-	t_pixel		*elem;
-	t_global	*tmp;
-
-	tmp = all->head;
-	while (tmp)
-	{
-		elem = tmp->head;
-		while (elem)
-		{
-			printf("%4.0f", elem->y);
-			elem = elem->next;
-		}
-		printf("\n");
-		tmp = tmp->next;
-	}
-}
+#include "stdlib.h"
 
 void	horizontal(t_all *all)
 {
 	t_global	*tmp;
 	t_pixel		*che;
+	t_ln		ln;
 
 	tmp = all->head;
 	while (tmp)
@@ -44,7 +26,11 @@ void	horizontal(t_all *all)
 		che = tmp->head;
 		while (che->next)
 		{
-			line(all, che->x, che->y, che->next->x, che->next->y);
+			ln.x1 = che->x;
+			ln.y1 = che->y;
+			ln.x2 = che->next->x;
+			ln.y2 = che->next->y;
+			line(all, &ln);
 			che = che->next;
 		}
 		tmp = tmp->next;
@@ -56,6 +42,7 @@ void	vertical(t_all *all)
 	t_pixel		*fir;
 	t_pixel		*sec;
 	t_global	*tmp;
+	t_ln		ln;
 
 	tmp = all->head;
 	while (tmp->next)
@@ -64,7 +51,11 @@ void	vertical(t_all *all)
 		sec = tmp->next->head;
 		while (fir)
 		{
-			line(all, fir->x, fir->y, sec->x, sec->y);
+			ln.x1 = fir->x;
+			ln.y1 = fir->y;
+			ln.x2 = sec->x;
+			ln.y2 = sec->y;
+			line(all, &ln);
 			fir = fir->next;
 			sec = sec->next;
 		}
@@ -78,7 +69,8 @@ void	cage(t_all *all)
 
 	tmp = all->head;
 	all->win_str.mlx_ptr = mlx_init();
-	all->win_str.win_ptr = mlx_new_window(all->win_str.mlx_ptr, HOR, VER, "fdf");
+	all->win_str.win_ptr = mlx_new_window(all->win_str.mlx_ptr,
+			HOR, VER, "fdf");
 	mlx_hook(all->win_str.win_ptr, 17, 1L << 17, exit_x, (void *)0);
 	mlx_key_hook(all->win_str.win_ptr, exit_esc, (void *)0);
 	for_each(all, large, NULL);

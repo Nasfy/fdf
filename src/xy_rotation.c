@@ -6,12 +6,12 @@
 /*   By: abiriuk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 17:29:02 by abiriuk           #+#    #+#             */
-/*   Updated: 2018/08/09 18:28:33 by abiriuk          ###   ########.fr       */
+/*   Updated: 2018/08/31 17:42:53 by abiriuk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+#include "stdlib.h"
 
 void	x_rotation_up(t_pixel *pixel, void *ptr)
 {
